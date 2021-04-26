@@ -1,0 +1,10 @@
+<?php
+define('CSS_PATH','css');
+define('DB_PATH','includes/dbconnect.php');
+define('VALIDATE','includes/validate_str.php');
+define('HEAD','includes/header.php');
+define('FOOTER','includes/footer.php');
+define('SIDEBAR','includes/left_sidebar.php');
+define('FUNCTIONS','includes/functions.php');
+define('CRUD','includes/crud.php');
+?>
