@@ -6,6 +6,6 @@ Purpose:Making connection with database famouskart
 Updated on:09-07-2018
 */
 date_default_timezone_set('asia/kolkata');
-$con=mysqli_connect("localhost","mulgandha_root","root");
+$con=mysqli_connect("localhost","mulgandh_root","root");
 mysqli_select_db($con,"mulgandh_famouskart");
 ?>
