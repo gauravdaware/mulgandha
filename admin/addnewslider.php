@@ -24,7 +24,7 @@ if(isset($_FILES['simage'])){
 	
 	if(in_array($ext_lower,$allowed_exts))
 	{
-		if($file_size>1048576)
+		if($file_size>10485760)
 			$err_msg="File size is should be <=1mb";
 		else
 		{
