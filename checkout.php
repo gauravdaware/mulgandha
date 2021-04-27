@@ -184,7 +184,7 @@ if(isset($apply)){
 						?>
 						</ul>
 						<form action="" method="post">
-						<span><?php if(isset($err_coupon)){echo $err_coupon;} ?></span>
+						<!--<span><?php //if(isset($err_coupon)){echo $err_coupon;} ?></span>-->
 						<ul class="user_info">
 							<p style="color:red;"><?php if(isset($err_coupon)){echo $err_coupon;}?></p>
 							<li class="single_field zip-field">
