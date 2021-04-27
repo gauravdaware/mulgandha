@@ -47,23 +47,31 @@ extract($_POST);
  ?>
 <?php
 if(isset($apply)){
-	$sql_coupon_chk="select coupon_code,coupon_worth,coupon_type,coupon_status from fk_coupons_tbl where coupon_code='".format_str($coupon)."' and coupon_status=1";
+	$sql_coupon_chk="select coupon_code,coupon_worth,coupon_type,coupon_status,coupon_valid_from,coupon_valid_till from fk_coupons_tbl where coupon_code='".format_str($coupon)."' and coupon_status=1";
 	$result_coupon = mysqli_query($con,$sql_coupon_chk) or die(mysqli_error($con));
 	$coupon_count = mysqli_num_rows($result_coupon);
 	if($coupon_count==1){
 		$coupon_row = mysqli_fetch_assoc($result_coupon);
-		if($coupon_row['coupon_type'] == "Rupees"){
-			$_SESSION['coupon_discount']= $coupon_row['coupon_worth'];
-			$_SESSION['coupon_code'] = $coupon_row['coupon_code'];
+		$valid_from = $coupon_row['coupon_valid_from'];
+		$valid_till = $coupon_row['coupon_valid_till'];
+		$today_date = date('Y-m-d');
+		if($today_date <= $valid_till && $today_date >= $valid_from){
+			if($coupon_row['coupon_type'] == "Rupees"){
+				$_SESSION['coupon_discount']= $coupon_row['coupon_worth'];
+				$_SESSION['coupon_code'] = $coupon_row['coupon_code'];
+			}
+			else{
+				//getting total of all items bought by user
+				$sql_total = "select sum(total) as subtotal from fk_cart_tbl where cart_status = 0 and user_id = $uid";
+				$result_total = mysqli_query($con,$sql_total) or die(mysqli_error($con));;
+				$row_total = mysqli_fetch_assoc($result_total);
+				$subtotal = $row_total['subtotal'];
+				$_SESSION['coupon_discount'] = ($subtotal * $coupon_row['coupon_worth'])/100;
+				$_SESSION['coupon_code'] = $coupon_row['coupon_code'];
+			}
 		}
 		else{
-			//getting total of all items bought by user
-			$sql_total = "select sum(total) as subtotal from fk_cart_tbl where cart_status = 0 and user_id = $uid";
-			$result_total = mysqli_query($con,$sql_total) or die(mysqli_error($con));;
-			$row_total = mysqli_fetch_assoc($result_total);
-			$subtotal = $row_total['subtotal'];
-			$_SESSION['coupon_discount'] = ($subtotal * $coupon_row['coupon_worth'])/100;
-			$_SESSION['coupon_code'] = $coupon_row['coupon_code'];
+			$err_coupon = "Coupon Code is expired";
 		}
 	}
 	else
