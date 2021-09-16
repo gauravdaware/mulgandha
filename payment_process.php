@@ -15,7 +15,7 @@ if(isset($payment_id)){
 	$added_on = date('Y-m-d');
 	$sql_update_cart = "update fk_cart_tbl set cart_status = 1, order_id = $order_id, payment_status = 1 where user_id = $uid and cart_status = 0";
 	$sql_insert_payment_details = "insert into fk_payment_history_tbl (user_id,order_id,mihpay_id,payment_mode,payment_status,payment_amount,added_on,payee_name,payee_mobile,error_message) values ($uid,$order_id,'$payment_id','Online',1,$amount,'$added_on','$name','$phone','$status')";
-	$sql_update_order = "update fk_orders_tbl set order_status = 3, payment_type = 'Online' where order_id = $order_id";
+	$sql_update_order = "update fk_orders_tbl set order_status = 1, payment_type = 'Online' where order_id = $order_id";
 	
 	$cart_result=mysqli_query($con, $sql_update_cart) or die(mysqli_error($con));
 	$result_payment_details = mysqli_query($con,$sql_insert_payment_details) or die(mysqli_error($con));
