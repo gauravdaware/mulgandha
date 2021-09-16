@@ -133,6 +133,8 @@ if(empty($_SESSION['email'])){
 								  echo "<p style='color:green'>New Order</p>";
 							  else if($row['order_status']==2)
 								  echo "<p style='color:red'>Canceled By User</p>";
+							  else if ($row['order_status']==3)
+								  echo "<p style='color:red'>Order Canceled</p>";
 							?>
 							</td>
 							<td><?php echo strtoupper($row['payment_type']);?> </td>
