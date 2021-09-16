@@ -146,9 +146,9 @@ if(empty($_SESSION['email'])){
 							  <a style="color:red;border-bottom:1px solid;" href="order_cancel.php?oid=<?php echo $row['order_id'];?>">Cancel</a>
 							  <?php 
 							  }
-							  if($row['order_status']==1){
+							  if($row['order_status']==2){
 							  ?>
-							  <a style="color:green;border-bottom:1px solid;" href="approve_cancelation.php?oid=<?php echo $row['order_id'];?>">Approve</a>
+							  <a style="color:green;border-bottom:1px solid;" href="approve_cancelation.php?oid=<?php echo $row['order_id'];?>">Approve Cancel</a>
 							  <?php
 							  }
 							  ?>
