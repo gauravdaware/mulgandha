@@ -112,7 +112,7 @@ if(empty($_SESSION['email'])){
 								$sql_qry="select * from fk_orders_tbl where order_id like '$searchstr%'";
 							}
 							else
-								$sql_qry="select * from fk_orders_tbl where order_status = 1 or order_status = 2 and order_cancel_status = 0";
+								$sql_qry="select * from fk_orders_tbl where order_status = 1 or order_status = 2 and order_cancel_status = 0 order by order_id desc";
 							
 						$result_set = mysqli_query($con,$sql_qry);
 						$count = mysqli_num_rows($result_set);
