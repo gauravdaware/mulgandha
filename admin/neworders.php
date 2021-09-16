@@ -140,8 +140,12 @@ if(empty($_SESSION['email'])){
 							<td><?php echo strtoupper($row['payment_type']);?> </td>
 							<td>
 							  <a style="color:blue;border-bottom:1px solid;" href="view_order_products.php?oid=<?php echo $row['order_id'];?>">View</a>
+							  <?php
+							  if (isset($row['order_status']==3)){echo "";}else{
+							  ?>
 							  <a style="color:red;border-bottom:1px solid;" href="order_cancel.php?oid=<?php echo $row['order_id'];?>">Cancel</a>
 							  <?php 
+							  }
 							  if($row['order_status']==2){
 							  ?>
 							  <a style="color:green;border-bottom:1px solid;" href="approve_cancelation.php?oid=<?php echo $row['order_id'];?>">Approve</a>
